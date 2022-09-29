@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 export const login = async (user) => {
     try {
         const res = await fetch(
-            `${process.env.REACT_APP_API_SERVER}/users/login`,
+            `${process.env.REACT_APP_API_URI}/users/login`,
             {
                 method: "POST",
                 headers: {
@@ -22,7 +22,7 @@ export const login = async (user) => {
 export const register = async (user) => {
     try {
         const res = await fetch(
-            `${process.env.REACT_APP_API_SERVER}/users/register`,
+            `${process.env.REACT_APP_API_URI}/users/register`,
             {
                 method: "POST",
                 headers: {

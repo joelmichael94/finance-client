@@ -1,13 +1,10 @@
 export const getAllTransactions = async () => {
-    const res = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/transactions`,
-        {
-            method: "GET",
-            headers: {
-                "x-auth-token": localStorage.getItem("token"),
-            },
-        }
-    );
+    const res = await fetch(`${process.env.REACT_APP_API_URI}/transactions`, {
+        method: "GET",
+        headers: {
+            "x-auth-token": localStorage.getItem("token"),
+        },
+    });
     const data = await res.json({});
     if (!res.ok) {
         throw new Error("Something went wrong");
@@ -28,23 +25,20 @@ export const addTransaction = async (transaction, image, user) => {
     formData.append("date", date);
     formData.append("image", image);
 
-    const res = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/transactions`,
-        {
-            method: "POST",
-            headers: {
-                "x-auth-token": localStorage.getItem("token"),
-            },
-            body: formData,
-        }
-    );
+    const res = await fetch(`${process.env.REACT_APP_API_URI}/transactions`, {
+        method: "POST",
+        headers: {
+            "x-auth-token": localStorage.getItem("token"),
+        },
+        body: formData,
+    });
     const data = await res.json({});
     return data;
 };
 
 export const deleteTransaction = async (id) => {
     let res = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/transactions/${id}`,
+        `${process.env.REACT_APP_API_URI}/transactions/${id}`,
         {
             method: "DELETE",
             headers: {
@@ -69,7 +63,7 @@ export const updateTransaction = async (transaction, image, _id) => {
     formData.append("image", image);
 
     let res = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/transactions/${_id}`,
+        `${process.env.REACT_APP_API_URI}/transactions/${_id}`,
         {
             method: "PUT",
             headers: {
@@ -86,7 +80,7 @@ export const searchByDate = async (date) => {
     const id = new Date(date);
 
     const res = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/transactions/${id}`,
+        `${process.env.REACT_APP_API_URI}/transactions/${id}`,
         {
             method: "GET",
             headers: {
@@ -107,7 +101,7 @@ export const searchByRange = async (range) => {
     const newEnd = new Date(end);
 
     const res = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/transactions/${newStart}/${newEnd}`,
+        `${process.env.REACT_APP_API_URI}/transactions/${newStart}/${newEnd}`,
         {
             method: "GET",
             headers: {
