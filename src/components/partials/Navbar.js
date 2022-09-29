@@ -45,15 +45,6 @@ const Navbar = () => {
                         {isAuth && user ? (
                             <>
                                 <li>
-                                    <Link
-                                        to="/profile"
-                                        className="justify-between"
-                                    >
-                                        Profile
-                                        <span className="badge">🔔</span>
-                                    </Link>
-                                </li>
-                                <li>
                                     <button
                                         onClick={() => {
                                             logout();
