@@ -51,6 +51,10 @@ export const Period = () => {
     };
     const navigate = useNavigate();
 
+    const onDateChange = (e) => {
+        setDate({ ...date, [e.target.name]: e.target.value });
+    };
+
     const onRangeChange = (e) => {
         setRange({ ...range, [e.target.name]: e.target.value });
     };
@@ -58,6 +62,7 @@ export const Period = () => {
     const searchDateSubmit = async (e) => {
         e.preventDefault();
         const res = await searchByDate(date);
+        console.log(res);
         navigate("/single", { state: { data: res } });
         toggleVisible();
     };
@@ -111,9 +116,7 @@ export const Period = () => {
                                     <input
                                         type="date"
                                         className="px-4 mt-4 rounded-md bg-slate-700"
-                                        onChange={(e) =>
-                                            setDate(e.target.value)
-                                        }
+                                        onChange={onDateChange}
                                     />
                                 </div>
                                 <div className="flex justify-between my-2">

@@ -77,10 +77,10 @@ export const updateTransaction = async (transaction, image, _id) => {
 };
 
 export const searchByDate = async (date) => {
-    const id = new Date(date);
+    const newDate = new Date(date);
 
     const res = await fetch(
-        `${process.env.REACT_APP_API_URI}/transactions/${id}`,
+        `${process.env.REACT_APP_API_URI}/transactions/${newDate}`,
         {
             method: "GET",
             headers: {
