@@ -2,11 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Modal, Button } from "react-daisyui";
 import { ColorRing } from "react-loader-spinner";
-import {
-    getAllTransactions,
-    searchByDate,
-    searchByRange,
-} from "../api/transactions";
+import { getAllTransactions } from "../api/transactions";
 import { useQuery } from "react-query";
 import {
     AddTransactionBttn,
@@ -36,14 +32,19 @@ import {
     October,
     September,
 } from "./Months";
+import moment from "moment";
 
 export const Period = () => {
     const [visible, setVisible] = useState(false);
-    const [date, setDate] = useState();
+    const [date, setDate] = useState({
+        search: new Date(),
+    });
+
     const [range, setRange] = useState({
         start: new Date(),
         end: new Date(),
     });
+
     const [isRange, setIsRange] = useState(false);
 
     const toggleVisible = () => {
@@ -61,17 +62,13 @@ export const Period = () => {
 
     const searchDateSubmit = async (e) => {
         e.preventDefault();
-        const res = await searchByDate(date);
-        console.log(res);
-        navigate("/single", { state: { data: res } });
+        navigate("/single", { state: { data: date } });
         toggleVisible();
     };
 
     const searchRangeSubmit = async (e) => {
         e.preventDefault();
-        const res = await searchByRange(range);
-        console.log(res);
-        navigate("/multi", { state: { data: res } });
+        navigate("/multi", { state: { data: range } });
         toggleVisible();
     };
 
@@ -117,6 +114,7 @@ export const Period = () => {
                                         type="date"
                                         className="px-4 mt-4 rounded-md bg-slate-700"
                                         onChange={onDateChange}
+                                        name="search"
                                     />
                                 </div>
                                 <div className="flex justify-between my-2">
@@ -416,8 +414,41 @@ export const Totals = () => {
 };
 
 export const SingleSearch = () => {
+    const { data, error, isLoading, isError } = useQuery(
+        ["searches"],
+        async () => await getAllTransactions()
+    );
+
     const location = useLocation();
-    const data = location.state.data.transaction;
+    const results = location.state.data;
+    const newResults = moment(new Date(results.search)).format("YYYY-MM-DD");
+    // console.log(newResults);
+    // const startSearch = newResults.setHours(0, 0, 0);
+    // const endSearch = newResults.setHours(23, 59, 59);
+    // console.log(typeof new Date(startSearch));
+    // console.log(startSearch.getDate());
+
+    if (isLoading) {
+        return (
+            <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+            />
+        );
+    }
+
+    if (isError) {
+        return <h2>Error: {error.message}</h2>;
+    }
+
+    // let test = moment(data[7].date).format("YYYY-MM-DD");
+
+    // console.log(moment(newResults).isSame(test));
 
     return (
         <div>
@@ -427,18 +458,49 @@ export const SingleSearch = () => {
             <h1 className="text-center text-4xl font-bold py-5 underline">
                 Search Results
             </h1>
-            {data.length > 0
-                ? data.map((transaction, i) => (
-                      <Transaction data={transaction} key={i} />
-                  ))
+            {data && results
+                ? data.map((transaction, i) => {
+                      let dateFromDb = moment(transaction.date).format(
+                          "YYYY-MM-DD"
+                      );
+                      if (moment(newResults).isSame(dateFromDb)) {
+                          return <Transaction data={transaction} key={i} />;
+                      }
+                  })
                 : null}
         </div>
     );
 };
 
 export const MultiSearch = () => {
+    const { data, error, isLoading, isError } = useQuery(
+        ["searches"],
+        async () => await getAllTransactions()
+    );
+
     const location = useLocation();
-    const data = location.state.data.results;
+    const results = location.state.data;
+    const { start, end } = results;
+    const newStart = moment(new Date(start)).format("YYYY-MM-DD");
+    const newEnd = moment(new Date(end)).format("YYYY-MM-DD");
+
+    if (isLoading) {
+        return (
+            <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+            />
+        );
+    }
+
+    if (isError) {
+        return <h2>Error: {error.message}</h2>;
+    }
 
     return (
         <div>
@@ -448,10 +510,18 @@ export const MultiSearch = () => {
             <h1 className="text-center text-4xl font-bold py-5 underline">
                 Search Results
             </h1>
-            {data.length > 0
-                ? data.map((transaction, i) => (
-                      <Transaction data={transaction} key={i} />
-                  ))
+            {data && results
+                ? data.map((transaction, i) => {
+                      let dateFromDb = moment(transaction.date).format(
+                          "YYYY-MM-DD"
+                      );
+                      if (
+                          moment(dateFromDb).isSameOrAfter(newStart) &&
+                          moment(dateFromDb).isSameOrBefore(newEnd)
+                      ) {
+                          return <Transaction data={transaction} key={i} />;
+                      }
+                  })
                 : null}
         </div>
     );
