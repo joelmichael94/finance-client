@@ -3,29 +3,23 @@ import { Link } from "react-router-dom";
 import { logout } from "../api/users";
 import { useNavigate } from "react-router-dom";
 import { checkAuth } from "../api/users";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const { isAuth, user } = checkAuth();
 
     return (
-        <div className="navbar py-4 btn-ghost rounded-b-full">
+        <div className="navbar py-4 bg-neutral">
             <div className="flex-1 pl-10">
                 <Link
                     to="/"
-                    className="btn-ghost normal-case text-xl pt-1 pb-2 px-7 rounded font-extrabold"
+                    className="normal-case text-xl pt-1 pb-2 px-7 rounded font-extrabold"
                 >
                     easySave
                 </Link>
             </div>
             <div className="flex-none gap-2">
-                <div className="form-control">
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        className="input input-bordered"
-                    />
-                </div>
                 <div className="dropdown dropdown-end pr-16">
                     <label
                         tabIndex={0}
@@ -49,6 +43,13 @@ const Navbar = () => {
                                         onClick={() => {
                                             logout();
                                             navigate("/");
+                                            toast.success("Logged out", {
+                                                position: "top-center",
+                                                autoClose: 3500,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                icon: "✔",
+                                            });
                                         }}
                                     >
                                         Logout

@@ -9,6 +9,7 @@ import {
 } from "../api/transactions";
 import { ColorRing, Oval } from "react-loader-spinner";
 import { checkAuth } from "../api/users";
+import { toast } from "react-toastify";
 
 export const AddTransactionBttn = () => {
     return (
@@ -46,9 +47,25 @@ export const AddTransaction = () => {
         ({ transaction, image, user }) =>
             addTransaction(transaction, image, user),
         {
-            onSuccess: () => {
+            onSuccess: (data) => {
                 queryClient.invalidateQueries(["transactions"]);
-                navigate("/");
+                toast.success(data.message, {
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    icon: "✔",
+                });
+                navigate("/daily");
+            },
+            onError: (error) => {
+                toast.error(error.message, {
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    icon: "❌",
+                });
             },
         }
     );
@@ -305,9 +322,25 @@ export const Transaction = ({
     const dateStr = new Date(date).toString();
 
     const mutation = useMutation((_id) => deleteTransaction(_id), {
-        onSuccess: () => {
+        onSuccess: (data) => {
             queryClient.invalidateQueries(["transactions"]);
-            navigate("/");
+            toast.success(data.message, {
+                position: "top-center",
+                autoClose: 3500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                icon: "✔",
+            });
+            navigate("/daily");
+        },
+        onError: (error) => {
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 3500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                icon: "❌",
+            });
         },
     });
 
@@ -401,9 +434,25 @@ export const EditTransaction = ({ data }) => {
         ({ transaction, image }) =>
             updateTransaction(transaction, image, data._id),
         {
-            onSuccess: () => {
+            onSuccess: (data) => {
                 queryClient.invalidateQueries(["transactions"]);
-                navigate("/");
+                toast.success(data.message, {
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    icon: "✔",
+                });
+                navigate("/daily");
+            },
+            onError: (error) => {
+                toast.error(error.message, {
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    icon: "❌",
+                });
             },
         }
     );

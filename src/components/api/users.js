@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 
 export const login = async (user) => {
     try {
@@ -12,9 +13,16 @@ export const login = async (user) => {
                 body: JSON.stringify(user),
             }
         );
-        const data = await res.text();
-        if (res.ok) localStorage.setItem("token", data);
+
+        const data = await res.json();
+        if (res.ok) {
+            localStorage.setItem("token", data.token);
+            return data;
+        }
+        // invalid input
+        if (!res.ok) throw new Error(data.message);
     } catch (e) {
+        // server error (backend unable to fetch)
         throw new Error(e.message);
     }
 };
@@ -33,6 +41,7 @@ export const register = async (user) => {
         );
         const data = await res.json();
         if (res.ok) return data;
+        if (!res.ok) throw new Error(data.message);
     } catch (e) {
         throw new Error(e.message);
     }

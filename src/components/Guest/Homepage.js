@@ -1,5 +1,5 @@
 import React from "react";
-import { BannerTop, BannerMid, BannerBottom } from "../Guest";
+import { BannerTop, BannerMid } from "../Guest";
 
 const Homepage = () => {
     return (
@@ -7,7 +7,7 @@ const Homepage = () => {
             <div>
                 <BannerTop />
                 <BannerMid />
-                <BannerBottom />
+                {/* <BannerBottom /> */}
             </div>
         </>
     );

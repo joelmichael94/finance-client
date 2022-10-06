@@ -11,13 +11,11 @@ export const BannerTop = () => {
                 <div className="flex flex-col items-start justify-center w-3/5 text-left">
                     <div>
                         <h1 className="text-5xl text-blue-300 font-bold">
-                            Lorem ipsum dolor
+                            Financial Tracker
                         </h1>
                         <p className="py-12 text-xl">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco . . .
+                            Keep track of all your income and expenses all in
+                            one place.
                         </p>
                     </div>
                     <div>
@@ -42,7 +40,7 @@ export const BannerMid = () => {
         <div className="flex flex-col items-center justify-center py-24 bg-neutral">
             <div>
                 <h1 className="text-5xl text-blue-300 font-bold">
-                    Lorem ipsum dolor
+                    Our Features
                 </h1>
             </div>
             <div className="flex items-center px-48 pt-10 justify-evenly">
@@ -54,35 +52,38 @@ export const BannerMid = () => {
                 <div className="flex flex-col items-end justify-center w-2/5">
                     <ul>
                         <li className="pb-4">
-                            <h1 className="font-bold text-lg">Lorem ipsum</h1>
+                            <h1 className="font-bold text-lg">
+                                Log your Income and Expenses
+                            </h1>
+                            <p>Any amount, at any time, all in one place.</p>
+                        </li>
+                        <li className="pb-4">
+                            <h1 className="font-bold text-lg">
+                                Keep documentation of your transactions
+                            </h1>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
+                                Upload images of your transactions for future
+                                reference.
                             </p>
                         </li>
                         <li className="pb-4">
-                            <h1 className="font-bold text-lg">Lorem ipsum</h1>
+                            <h1 className="font-bold text-lg">
+                                View your Daily, Weekly, and Monthly account
+                                balance
+                            </h1>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
+                                All your income and expenses are tracked daily,
+                                weekly and monthly for a full overview of your
+                                account balance.
                             </p>
                         </li>
                         <li className="pb-4">
-                            <h1 className="font-bold text-lg">Lorem ipsum</h1>
+                            <h1 className="font-bold text-lg">
+                                Search back previous transactions
+                            </h1>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </p>
-                        </li>
-                        <li className="pb-4">
-                            <h1 className="font-bold text-lg">Lorem ipsum</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
+                                Find back your previous transactions based on a
+                                specific date or a range of dates.
                             </p>
                         </li>
                     </ul>
@@ -98,34 +99,34 @@ export const BannerMid = () => {
     );
 };
 
-export const BannerBottom = () => {
-    return (
-        <>
-            <div className="flex flex-col justify-center items-center py-10">
-                <h1 className="text-5xl text-blue-300 font-bold">
-                    Lorem ipsum dolor
-                </h1>
-                {/*Map the Reviews Array and display 3 cards with random reviews*/}
-                <div className="card card-side bg-base-100 shadow-xl">
-                    <figure>
-                        <img
-                            src="https://placeimg.com/200/280/arch"
-                            alt="UserImage"
-                        />
-                    </figure>
-                    <div className="card-body">
-                        <h2 className="card-title">Review title</h2>
-                        <p>
-                            Review (Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.)
-                        </p>
-                        <div className="card-actions justify-end">
-                            <small>User Name</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
-};
+// export const BannerBottom = () => {
+//     return (
+//         <>
+//             <div className="flex flex-col justify-center items-center py-10">
+//                 <h1 className="text-5xl text-blue-300 font-bold">
+//                     Lorem ipsum dolor
+//                 </h1>
+//                 {/*Map the Reviews Array and display 3 cards with random reviews*/}
+//                 <div className="card card-side bg-base-100 shadow-xl">
+//                     <figure>
+//                         <img
+//                             src="https://placeimg.com/200/280/arch"
+//                             alt="UserImage"
+//                         />
+//                     </figure>
+//                     <div className="card-body">
+//                         <h2 className="card-title">Review title</h2>
+//                         <p>
+//                             Review (Lorem ipsum dolor sit amet, consectetur
+//                             adipiscing elit, sed do eiusmod tempor incididunt ut
+//                             labore et dolore magna aliqua.)
+//                         </p>
+//                         <div className="card-actions justify-end">
+//                             <small>User Name</small>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </>
+//     );
+// };

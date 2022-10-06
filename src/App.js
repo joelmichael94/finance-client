@@ -18,12 +18,14 @@ import {
     Weekly,
 } from "./components/Customer";
 import { checkAuth } from "./components/api/users";
+import { ToastContainer } from "react-toastify";
 
 function App() {
     const { isAuth, user } = checkAuth();
 
     return (
         <div>
+            <ToastContainer />
             <Routes>
                 <Route
                     exact

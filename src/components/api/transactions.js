@@ -14,7 +14,7 @@ export const getAllTransactions = async () => {
 
 export const addTransaction = async (transaction, image, user) => {
     const date = new Date(transaction.date);
-    date.setHours(0,0,0);
+    date.setHours(0, 0, 0);
     const formData = new FormData();
     formData.append("userId", user.data._id);
     formData.append("name", transaction.name);
@@ -46,7 +46,7 @@ export const deleteTransaction = async (id) => {
             },
         }
     );
-    let data = await res.json();
+    let data = await res.json({});
     return data;
 };
 
